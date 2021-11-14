@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from './services/game.service';
 
 @Component({
@@ -11,6 +11,12 @@ import { GameService } from './services/game.service';
   `],
   providers: [GameService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'color-game-angular';
+
+  constructor(private gameService: GameService) {}
+
+  ngOnInit(): void {
+    this.gameService.generateColors();
+  }
 }

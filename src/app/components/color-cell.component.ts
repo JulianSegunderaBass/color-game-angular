@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: 'color-cell',
   template: `
-    <div class="color-cell" style="background-color: red;"></div>
+    <div class="color-cell" [ngStyle]="{'background-color': cellColor}"></div>
   `,
   styles: [`
     
@@ -11,5 +11,5 @@ import { Component } from "@angular/core";
 })
 
 export class ColorCell {
-
+  @Input('cellColor') cellColor: string = '';
 }
