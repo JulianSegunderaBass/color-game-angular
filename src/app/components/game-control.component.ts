@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { GameService } from "../services/game.service";
 
 @Component({
   selector: 'game-control',
   template: `
-    <div class="headline" [ngStyle]="{'background-color': winningColor}">
+    <div class="headline">
       <p>The Great</p>
       <p class="current-color">{{ winningColor }}</p>
       <p>Color Game</p>
@@ -22,17 +22,14 @@ import { GameService } from "../services/game.service";
   `,
   styles: [`
     
-  `],
-  providers: [GameService]
+  `]
 })
 
 export class GameControl implements OnInit {
-  winningColor: string = '';
-
-  constructor(private gameService: GameService) {}
+  @Input() winningColor: string = '';
 
   ngOnInit(): void {
-    this.winningColor = this.gameService.winningColor;
+    
   }
 
 }

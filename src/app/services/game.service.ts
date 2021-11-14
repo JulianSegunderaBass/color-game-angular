@@ -11,8 +11,6 @@ export class GameService {
     'rgb(85, 125, 196)',
   ]
 
-  winningColor: string = this.colorList[Math.floor(Math.random() * this.colorList.length)];
-
   getColors() {
     return this.colorList.slice();
   }

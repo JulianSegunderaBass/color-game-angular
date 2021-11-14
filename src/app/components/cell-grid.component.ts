@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { GameService } from "../services/game.service";
 
 @Component({
@@ -14,9 +14,8 @@ import { GameService } from "../services/game.service";
 })
 
 export class CellGrid implements OnInit {
-  colorList: string[] = []
-  constructor(private gameService: GameService) {}
+  @Input() colorList: string[] = []
   ngOnInit(): void {
-    this.colorList = this.gameService.getColors();
+    
   }
 }

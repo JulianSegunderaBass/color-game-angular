@@ -4,7 +4,7 @@ import { GameService } from './services/game.service';
 @Component({
   selector: 'app-root',
   template: `
-    <game-board></game-board>
+    <game-board [colorList]="colorList"></game-board>
   `,
   styles: [`
     
@@ -13,10 +13,12 @@ import { GameService } from './services/game.service';
 })
 export class AppComponent implements OnInit {
   title = 'color-game-angular';
+  colorList: string[] = []
 
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
     this.gameService.generateColors();
+    this.colorList = this.gameService.getColors();
   }
 }

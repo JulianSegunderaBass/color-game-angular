@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { GameService } from "../services/game.service";
 
 @Component({
@@ -6,19 +6,21 @@ import { GameService } from "../services/game.service";
   template: `
     <div class="container">
       <div class="board-content">
-        <game-control></game-control>
-        <cell-grid></cell-grid>
+        <game-control [winningColor]="winningColor"></game-control>
+        <cell-grid [colorList]="colorList"></cell-grid>
       </div>
     </div>
   `,
   styles: [`
     
   `],
-  providers: [GameService]
 })
 
-export class GameBoard {
+export class GameBoard implements OnInit{
+  @Input() colorList: string[] = [];
+  winningColor: string = '';
 
-  constructor(private gameService: GameService) {}
-
+  ngOnInit(): void {
+    this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
+  }
 }
