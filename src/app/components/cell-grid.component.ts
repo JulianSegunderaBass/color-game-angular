@@ -4,7 +4,6 @@ import { Component } from "@angular/core";
   selector: 'cell-grid',
   template: `
     <h3>Cell Grid</h3>
-    <color-cell></color-cell>
   `,
   styles: [`
     
