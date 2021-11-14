@@ -30,6 +30,7 @@ import { Component } from "@angular/core";
       display: grid;
       grid-template-columns: 1fr 2fr;
       gap: 2em;
+      height: 100%;
     }
   `]
 })
