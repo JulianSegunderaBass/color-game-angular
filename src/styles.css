@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1;
+}
+.container {
+  max-width: 1300px;
+  height: 90vh;
+  margin: 3rem auto;
+  background-color: #e9ecef;
+  font-family: 'Inter', sans-serif;
+}
+.board-content {
+  font-size: 1.8rem;
+  padding: 3rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  height: 100%;
+}
+game-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+.headline {
+  font-size: 3.5rem;
+  background-color: blue;
+  text-align: center;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.headline p {
+  color: white;
+}
+.current-color {
+  font-weight: 700;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.5rem;
+}
+.controls p {
+  background-color: #ced4da;
+  padding: 2rem;
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+}
+.controls p.active {
+  background-color: blue;
+  color: white;
+}
+.end-message {
+  font-weight: 700;
+  font-size: 3.5rem;
+  text-align: center;
+  color: green;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 2.8rem;
+  margin-top: 4rem;
+}
+cell-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cell-grid {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 2.5rem;
+  column-gap: 2.5rem;
+  justify-self: start;
+}
+.color-cell {
+  height: 20rem;
+  /* width: 16rem; */
+  cursor: pointer;
+}

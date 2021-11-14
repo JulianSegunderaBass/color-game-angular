@@ -11,27 +11,7 @@ import { Component } from "@angular/core";
     </div>
   `,
   styles: [`
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-    .container {
-      max-width: 1300px;
-      height: 90vh;
-      margin: 30px auto;
-      background-color: #e9ecef;
-      font-family: 'Inter', sans-serif;
-      font-size: 62.5%;
-    }
-    .board-content {
-      font-size: 2em;
-      padding: 1.5em 2em;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 2em;
-      height: 100%;
-    }
+    
   `]
 })
 
