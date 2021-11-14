@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { GameService } from "../services/game.service";
 
 @Component({
@@ -6,8 +6,8 @@ import { GameService } from "../services/game.service";
   template: `
     <div class="container">
       <div class="board-content">
-        <game-control [winningColor]="winningColor"></game-control>
-        <cell-grid [colorList]="colorList"></cell-grid>
+        <game-control [winningColor]="winningColor" (colorsReset)="onColorsReset()"></game-control>
+        <cell-grid [colorList]="colorList" [winningColor]="winningColor"></cell-grid>
       </div>
     </div>
   `,
@@ -18,9 +18,15 @@ import { GameService } from "../services/game.service";
 
 export class GameBoard implements OnInit{
   @Input() colorList: string[] = [];
-  winningColor: string = '';
+  @Input() winningColor: string = '';
+  @Output() colorsReset = new EventEmitter();
+  
+
+  onColorsReset() {
+    this.colorsReset.emit();
+  }
 
   ngOnInit(): void {
-    this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
+    
   }
 }

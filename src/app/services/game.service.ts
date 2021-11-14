@@ -1,22 +1,15 @@
+import { EventEmitter } from "@angular/core";
+
 export class GameService {
-  private colorList: string[] = [
-    'rgb(69, 48, 157)',
-    'rgb(145, 215, 48)',
-    'rgb(25, 83, 64)',
-    'rgb(48, 67, 15)',
-    'rgb(80, 46, 75)',
-    'rgb(98, 114, 175)',
-    'rgb(250, 200, 164)',
-    'rgb(147, 167, 214)',
-    'rgb(85, 125, 196)',
-  ]
+  private colorList: string[] = [];
+  gameResult = new EventEmitter<string>();
 
   getColors() {
     return this.colorList.slice();
   }
 
   generateColors() {
-    this.colorList = []
+    this.colorList = [];
     for (let i = 0; i < 9; i++) {
       this.colorList.push(this.generateRandomColor());
     }
