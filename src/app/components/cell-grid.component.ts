@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: 'cell-grid',
   template: `
-    <div class="cell-grid">
+    <div class="grid-container">
       <color-cell></color-cell>
       <color-cell></color-cell>
       <color-cell></color-cell>

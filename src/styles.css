@@ -18,7 +18,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 .board-content {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   padding: 3rem 4rem;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -28,12 +28,12 @@ body {
 game-control {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: stretch;
   gap: 2.5rem;
 }
 .headline {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   background-color: blue;
   text-align: center;
   padding: 3rem;
@@ -50,11 +50,11 @@ game-control {
 .controls {
   display: flex;
   justify-content: space-between;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 .controls p {
   background-color: #ced4da;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   flex-grow: 1;
   text-align: center;
   cursor: pointer;
@@ -65,7 +65,7 @@ game-control {
 }
 .end-message {
   font-weight: 700;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   text-align: center;
   color: green;
 }
@@ -73,25 +73,18 @@ game-control {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  font-size: 2.8rem;
-  margin-top: 4rem;
+  font-size: 2rem;
+  margin-top: 3rem;
 }
-cell-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cell-grid {
+.grid-container {
   width: 80%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 2.5rem;
-  column-gap: 2.5rem;
-  justify-self: start;
+  gap: 2.5rem;
 }
 .color-cell {
-  height: 20rem;
+  height: 18rem;
   /* width: 16rem; */
   cursor: pointer;
 }
