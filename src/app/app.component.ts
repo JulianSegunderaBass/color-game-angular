@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
       [winningColor]="winningColor"
       [gameStatus]="gameResult"
       [gameDifficulty]="gameDifficulty"
+      [counter]="counter"
+      (decrementCounter)="onDecrementCounter()"
       (changeDifficulty)="onDifficultyChange($event)"
       (colorsReset)="onColorsReset()" 
       (gameResult)="onGameFinish($event)">
@@ -23,6 +25,7 @@ export class AppComponent implements OnInit {
   gameDifficulty: string = 'hard';
   winningColor: string = '';
   gameResult: string = '';
+  counter: number = 0;
 
   generateColors(num: number) {
     for (let i = 0; i < num; i++) {
@@ -46,6 +49,11 @@ export class AppComponent implements OnInit {
       this.generateColors(9);
     }
     this.gameResult = '';
+    this.counter = this.colorList.length;
+  }
+
+  onDecrementCounter() {
+    this.counter = this.counter - 1;
   }
 
   onDifficultyChange(diff: string) {
@@ -57,14 +65,18 @@ export class AppComponent implements OnInit {
       this.generateColors(9);
     }
     this.gameResult = '';
+    this.counter = this.colorList.length;
   }
 
   onGameFinish(status: string) {
     this.gameResult = status;
-    console.log(this.gameResult);
+    // console.log(this.gameResult);
+    this.counter = this.colorList.length;
+    console.log(this.counter);
   }
 
   ngOnInit(): void {
     this.generateColors(9);
+    this.counter = this.colorList.length;
   }
 }

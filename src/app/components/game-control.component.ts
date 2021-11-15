@@ -13,8 +13,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
       <p (click)="setDifficulty('hard')" [ngClass]="{'active': gameDifficulty === 'hard'}">Hard</p>
       <p (click)="resetColors()">Reset</p>
     </div>
-    <p class="end-message" *ngIf="gameStatus === 'win'">You won!</p>
-    <p class="end-message" *ngIf="gameStatus === 'lose'">You lost!</p>
+    <p class="end-message success" *ngIf="gameStatus === 'win'">You won!</p>
+    <p class="end-message failed" *ngIf="gameStatus === 'lose'">You lost!</p>
     <div class="information">
       <p>Click the cell with the matching color.</p>
       <p>You could try an easier difficulty if you need more practice.</p>
@@ -38,7 +38,7 @@ export class GameControl implements OnInit {
 
   setDifficulty(diff: string) {
     this.changeDifficulty.emit(diff);
-    console.log(this.gameDifficulty);
+    // console.log(this.gameDifficulty);
   }
 
   ngOnInit(): void {

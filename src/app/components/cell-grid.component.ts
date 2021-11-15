@@ -8,7 +8,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
         *ngFor="let color of colorList" 
         [cellColor]="color" 
         [winningColor]="winningColor" 
-        (gameResult)="onGameFinish($event)">
+        [counter]="counter"
+        (gameResult)="onGameFinish($event)"
+        (decrementCounter)="onDecrementCounter()">
       </color-cell>
     </div>
     <ng-template #winningBlocks>
@@ -16,7 +18,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
         <color-cell 
           *ngFor="let color of colorList" 
           [cellColor]="winningColor" 
-          [winningColor]="winningColor">
+          [winningColor]="winningColor"
+          [counter]="counter">
         </color-cell>
       </div>
     </ng-template>
@@ -30,13 +33,19 @@ export class CellGrid implements OnInit {
   @Input() colorList: string[] = []
   @Input() winningColor: string = '';
   @Input() gameStatus: string = '';
+  @Input() counter: number = 0;
   @Output() gameResult = new EventEmitter<string>();
+  @Output() decrementCounter = new EventEmitter();
 
   onGameFinish(status: string) {
     this.gameResult.emit(status);
   }
 
+  onDecrementCounter() {
+    this.decrementCounter.emit();
+  }
+
   ngOnInit(): void {
-    
+    // console.log(this.counter);
   }
 }

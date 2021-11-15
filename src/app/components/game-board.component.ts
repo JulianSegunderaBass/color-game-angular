@@ -16,6 +16,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
           [colorList]="colorList" 
           [winningColor]="winningColor"
           [gameStatus]="gameStatus" 
+          [counter]="counter"
+          (decrementCounter)="onDecrementCounter()"
           (gameResult)="onGameFinish($event)">
         </cell-grid>
       </div>
@@ -31,13 +33,19 @@ export class GameBoard implements OnInit{
   @Input() winningColor: string = '';
   @Input() gameStatus: string = '';
   @Input() gameDifficulty: string = '';
+  @Input() counter: number = 0;
   @Output() changeDifficulty = new EventEmitter<string>();
   @Output() colorsReset = new EventEmitter();
   @Output() gameResult = new EventEmitter<string>();
+  @Output() decrementCounter = new EventEmitter();
   
 
   onColorsReset() {
     this.colorsReset.emit();
+  }
+
+  onDecrementCounter() {
+    this.decrementCounter.emit();
   }
 
   onDifficultyChange(diff: string) {

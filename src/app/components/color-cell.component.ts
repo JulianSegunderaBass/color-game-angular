@@ -3,7 +3,11 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 @Component({
   selector: 'color-cell',
   template: `
-    <div class="color-cell" [ngStyle]="{'background-color': cellColor}" (click)="onSelectCell()">{{ cellColor }}</div>
+    <div class="color-cell" 
+      [ngStyle]="{'background': cellHidden ? 'transparent' : cellColor}" 
+      (click)="onSelectCell()">
+      {{ cellColor }}
+    </div>
   `,
   styles: [`
     
@@ -13,11 +17,20 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 export class ColorCell {
   @Input('cellColor') cellColor: string = '';
   @Input() winningColor: string = '';
+  @Input() counter: number = 0;
   @Output() gameResult = new EventEmitter<string>();
+  @Output() decrementCounter = new EventEmitter();
+  cellHidden: boolean = false;
 
   onSelectCell() {
     if (this.cellColor === this.winningColor) {
       this.gameResult.emit('win');
+    } else {
+      this.cellHidden = true;
+      this.decrementCounter.emit();
+      if (this.counter < 3) {
+        this.gameResult.emit('lose');
+      }
     }
   }
 }
