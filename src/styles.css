@@ -95,3 +95,6 @@ game-control {
   /* width: 16rem; */
   cursor: pointer;
 }
+.color-cell.hidden {
+  display: none;
+}
