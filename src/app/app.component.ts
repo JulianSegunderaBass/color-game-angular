@@ -70,9 +70,7 @@ export class AppComponent implements OnInit {
 
   onGameFinish(status: string) {
     this.gameResult = status;
-    // console.log(this.gameResult);
     this.counter = this.colorList.length;
-    console.log(this.counter);
   }
 
   ngOnInit(): void {

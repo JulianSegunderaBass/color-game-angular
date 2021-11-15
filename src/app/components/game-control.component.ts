@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 @Component({
   selector: 'game-control',
   template: `
-    <div class="headline" [ngStyle]="{'background-color': winningColor}">
+    <div class="headline" [ngStyle]="{'background-color': gameStatus === 'win' ? winningColor : ''}">
       <p>The Great</p>
       <p class="current-color">{{ winningColor }}</p>
       <p>Color Game</p>

@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 @Component({
   selector: 'cell-grid',
   template: `
-    <div class="grid-container" *ngIf="gameStatus === ''; else winningBlocks">
+    <div class="grid-container" *ngIf="gameStatus === ''; else evenBlocks">
       <color-cell 
         *ngFor="let color of colorList" 
         [cellColor]="color" 
@@ -13,7 +13,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
         (decrementCounter)="onDecrementCounter()">
       </color-cell>
     </div>
-    <ng-template #winningBlocks>
+    <ng-template #evenBlocks>
       <div class="grid-container">
         <color-cell 
           *ngFor="let color of colorList" 

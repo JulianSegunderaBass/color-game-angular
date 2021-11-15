@@ -1,3 +1,12 @@
+:root {
+  --container-bg: #e9ecef;
+  --headline-bg: #495057;
+  --control: #ced4da;
+  --control-hover: #adb5bd;
+  --control-active: #495057;
+  --control-border: #212529;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -14,7 +23,7 @@ body {
   max-width: 1300px;
   height: 90vh;
   margin: 3rem auto;
-  background-color: #e9ecef;
+  background-color: var(--container-bg);
   font-family: 'Inter', sans-serif;
 }
 .board-content {
@@ -36,7 +45,7 @@ game-control {
 }
 .headline {
   font-size: 2.5rem;
-  background-color: blue;
+  background-color: var(--headline-bg);
   text-align: center;
   padding: 3rem;
   display: flex;
@@ -55,15 +64,22 @@ game-control {
   font-size: 2rem;
 }
 .controls p {
-  background-color: #ced4da;
+  background-color: var(--control);
   padding: 1.5rem 2rem;
   flex-grow: 1;
   text-align: center;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+.controls p:hover {
+  background-color: var(--control-hover);
+}
+.controls p:active {
+  background-color: var(--control-active);
 }
 .controls p.active {
-  background-color: blue;
-  color: white;
+  box-shadow: inset 0 0 0 2px var(--control-border);
+  font-weight: 700;
 }
 .end-message {
   font-weight: 700;
@@ -94,7 +110,12 @@ game-control {
   height: 18rem;
   /* width: 16rem; */
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 .color-cell.hidden {
-  display: none;
+  height: 0;
+  width: 0;
+}
+.color-cell:hover {
+  transform: scale(105%);
 }

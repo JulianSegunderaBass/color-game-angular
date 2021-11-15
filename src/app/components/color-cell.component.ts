@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
       [ngStyle]="{'background': cellColor}"
       [ngClass]="{'hidden': cellHidden}"
       (click)="onSelectCell()">
-      {{ cellColor }}
     </div>
   `,
   styles: [`
