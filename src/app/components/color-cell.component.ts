@@ -1,5 +1,4 @@
-import { Component, Input } from "@angular/core";
-import { GameService } from "../services/game.service";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   selector: 'color-cell',
@@ -14,12 +13,11 @@ import { GameService } from "../services/game.service";
 export class ColorCell {
   @Input('cellColor') cellColor: string = '';
   @Input() winningColor: string = '';
-
-  constructor(private gameService: GameService) {}
+  @Output() gameResult = new EventEmitter<string>();
 
   onSelectCell() {
     if (this.cellColor === this.winningColor) {
-      this.gameService.gameResult.emit('win');
+      this.gameResult.emit('win');
     }
   }
 }

@@ -1,34 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from './services/game.service';
 
 @Component({
   selector: 'app-root',
   template: `
-    <game-board [colorList]="colorList" [winningColor]="winningColor" (colorsReset)="onColorsReset()"></game-board>
+    <game-board 
+      [colorList]="colorList" 
+      [winningColor]="winningColor"
+      [gameStatus]="gameResult"
+      (colorsReset)="onColorsReset()" 
+      (gameResult)="onGameFinish($event)">
+    </game-board>
   `,
   styles: [`
     
-  `],
-  providers: [GameService]
+  `]
 })
 export class AppComponent implements OnInit {
   title = 'color-game-angular';
-  colorList: string[] = []
+  colorList: string[] = [];
   winningColor: string = '';
+  gameResult: string = '';
 
-  constructor(private gameService: GameService) {}
+  generateColors() {
+    for (let i = 0; i < 9; i++) {
+      this.colorList.push(this.generateRandomColor());
+    }
+    this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
+  }
+
+  generateRandomColor() {
+    let r: number = Math.floor(Math.random() * (255 - 0 + 1) + 0);
+    let g: number = Math.floor(Math.random() * (255 - 0 + 1) + 0);
+    let b: number = Math.floor(Math.random() * (255 - 0 + 1) + 0);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
 
   onColorsReset() {
-    this.gameService.generateColors();
-    this.colorList = this.gameService.getColors();
-    this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
-    this.gameService.gameResult.emit('');
+    this.colorList = [];
+    this.generateColors();
+    this.gameResult = '';
+  }
+
+  onGameFinish(status: string) {
+    this.gameResult = status;
+    console.log(this.gameResult);
   }
 
   ngOnInit(): void {
-    this.gameService.generateColors();
-    this.colorList = this.gameService.getColors();
-    this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
-    this.gameService.gameResult.emit('');
+    this.generateColors();
   }
 }

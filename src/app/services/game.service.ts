@@ -2,7 +2,11 @@ import { EventEmitter } from "@angular/core";
 
 export class GameService {
   private colorList: string[] = [];
+  private winningColor: string = '';
   gameResult = new EventEmitter<string>();
+  colorsChanged = new EventEmitter<string[]>();
+  winningColorChanged = new EventEmitter<string>();
+  
 
   getColors() {
     return this.colorList.slice();
@@ -13,6 +17,10 @@ export class GameService {
     for (let i = 0; i < 9; i++) {
       this.colorList.push(this.generateRandomColor());
     }
+    this.colorsChanged.emit(this.colorList);
+    // this.getWinningColor(this.colorList);
+    this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
+    this.winningColorChanged.emit(this.winningColor);
   }
 
   generateRandomColor() {

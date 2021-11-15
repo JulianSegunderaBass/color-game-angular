@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { GameService } from "../services/game.service";
 
 @Component({
   selector: 'game-control',
   template: `
-    <div class="headline">
+    <div class="headline" [ngStyle]="{'background-color': winningColor}">
       <p>The Great</p>
       <p class="current-color">{{ winningColor }}</p>
       <p>Color Game</p>
@@ -29,18 +28,14 @@ import { GameService } from "../services/game.service";
 export class GameControl implements OnInit {
   @Input() winningColor: string = '';
   @Output() colorsReset = new EventEmitter();
-  gameStatus: string = '';
-
-  constructor(private gameService: GameService) {}
+  @Input() gameStatus: string = '';
 
   resetColors() {
     this.colorsReset.emit();
   }
 
   ngOnInit(): void {
-    this.gameService.gameResult.subscribe((result: string) => {
-      this.gameStatus = result;
-    });
+
   }
 
 }
