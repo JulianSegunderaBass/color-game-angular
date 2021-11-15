@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
       [colorList]="colorList" 
       [winningColor]="winningColor"
       [gameStatus]="gameResult"
+      [gameDifficulty]="gameDifficulty"
+      (changeDifficulty)="onDifficultyChange($event)"
       (colorsReset)="onColorsReset()" 
       (gameResult)="onGameFinish($event)">
     </game-board>
@@ -18,11 +20,12 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'color-game-angular';
   colorList: string[] = [];
+  gameDifficulty: string = 'hard';
   winningColor: string = '';
   gameResult: string = '';
 
-  generateColors() {
-    for (let i = 0; i < 9; i++) {
+  generateColors(num: number) {
+    for (let i = 0; i < num; i++) {
       this.colorList.push(this.generateRandomColor());
     }
     this.winningColor = this.colorList[Math.floor(Math.random() * this.colorList.length)];
@@ -37,7 +40,22 @@ export class AppComponent implements OnInit {
 
   onColorsReset() {
     this.colorList = [];
-    this.generateColors();
+    if (this.gameDifficulty === 'easy') {
+      this.generateColors(6);
+    } else {
+      this.generateColors(9);
+    }
+    this.gameResult = '';
+  }
+
+  onDifficultyChange(diff: string) {
+    this.gameDifficulty = diff;
+    this.colorList = [];
+    if (this.gameDifficulty === 'easy') {
+      this.generateColors(6);
+    } else {
+      this.generateColors(9);
+    }
     this.gameResult = '';
   }
 
@@ -47,6 +65,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generateColors();
+    this.generateColors(9);
   }
 }

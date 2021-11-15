@@ -9,8 +9,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
       <p>Color Game</p>
     </div>
     <div class="controls">
-      <p>Easy</p>
-      <p class="active">Hard</p>
+      <p (click)="setDifficulty('easy')" [ngClass]="{'active': gameDifficulty === 'easy'}">Easy</p>
+      <p (click)="setDifficulty('hard')" [ngClass]="{'active': gameDifficulty === 'hard'}">Hard</p>
       <p (click)="resetColors()">Reset</p>
     </div>
     <p class="end-message" *ngIf="gameStatus === 'win'">You won!</p>
@@ -27,15 +27,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 export class GameControl implements OnInit {
   @Input() winningColor: string = '';
-  @Output() colorsReset = new EventEmitter();
   @Input() gameStatus: string = '';
+  @Input() gameDifficulty: string = '';
+  @Output() colorsReset = new EventEmitter();
+  @Output() changeDifficulty = new EventEmitter<string>();
 
   resetColors() {
     this.colorsReset.emit();
   }
 
-  ngOnInit(): void {
+  setDifficulty(diff: string) {
+    this.changeDifficulty.emit(diff);
+    console.log(this.gameDifficulty);
+  }
 
+  ngOnInit(): void {
   }
 
 }
