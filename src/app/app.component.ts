@@ -35,9 +35,9 @@ export class AppComponent implements OnInit {
   }
 
   generateRandomColor() {
-    let r: number = Math.floor(Math.random() * (255 - 0 + 1) + 0);
-    let g: number = Math.floor(Math.random() * (255 - 0 + 1) + 0);
-    let b: number = Math.floor(Math.random() * (255 - 0 + 1) + 0);
+    let r: number = Math.floor((Math.floor(Math.random() * (255 - 0 + 1) + 0)) * 0.50);
+    let g: number = Math.floor((Math.floor(Math.random() * (255 - 0 + 1) + 0)) * 0.50);
+    let b: number = Math.floor((Math.floor(Math.random() * (255 - 0 + 1) + 0)) * 0.50);
     return `rgb(${r}, ${g}, ${b})`;
   }
 

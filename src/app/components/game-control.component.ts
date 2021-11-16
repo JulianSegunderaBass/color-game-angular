@@ -17,7 +17,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
     <p class="end-message failed" *ngIf="gameStatus === 'lose'">You lost!</p>
     <div class="information">
       <p>Click the cell with the matching color.</p>
-      <p>You could try an easier difficulty if you need more practice.</p>
+      <p>Try an easier difficulty if you need more practice.</p>
     </div>
   `,
   styles: [`

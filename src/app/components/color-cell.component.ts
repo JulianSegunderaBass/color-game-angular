@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   selector: 'color-cell',
   template: `
     <div class="color-cell" 
-      [ngStyle]="{'background': cellColor}"
+      [ngStyle]="{'background-color': cellColor}"
       [ngClass]="{'hidden': cellHidden}"
       (click)="onSelectCell()">
     </div>

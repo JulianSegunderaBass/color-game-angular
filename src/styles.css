@@ -48,6 +48,7 @@ game-control {
   background-color: var(--headline-bg);
   text-align: center;
   padding: 3rem;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -70,6 +71,12 @@ game-control {
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+.controls p:nth-of-type(1) {
+  border-radius: 8px 0 0 8px;
+}
+.controls p:nth-of-type(3) {
+  border-radius: 0 8px 8px 0;
 }
 .controls p:hover {
   background-color: var(--control-hover);
@@ -109,12 +116,13 @@ game-control {
 .color-cell {
   height: 18rem;
   /* width: 16rem; */
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .color-cell.hidden {
-  height: 0;
-  width: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 .color-cell:hover {
   transform: scale(105%);
