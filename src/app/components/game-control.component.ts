@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ColorsService } from "../colors.service";
 
 @Component({
   selector: 'game-control',
   template: `
-    <div class="headline" [ngStyle]="{'background-color': gameStatus === 'win' ? winningColor : ''}">
+    <div class="headline" [ngStyle]="{'background-color': gameStatus != '' ? winningColor : ''}">
       <p>The Great</p>
       <p class="current-color">{{ winningColor }}</p>
       <p>Color Game</p>
@@ -26,22 +27,32 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 })
 
 export class GameControl implements OnInit {
-  @Input() winningColor: string = '';
-  @Input() gameStatus: string = '';
-  @Input() gameDifficulty: string = '';
-  @Output() colorsReset = new EventEmitter();
-  @Output() changeDifficulty = new EventEmitter<string>();
+  gameStatus: string = '';
+  winningColor: string = '';
+  gameDifficulty: string = '';
+
+  constructor(private colorService: ColorsService) {
+    this.colorService.gameResultChanged.subscribe((status: string) => {
+      this.gameStatus = status;
+    });
+    this.colorService.winningColorChanged.subscribe((winningColor: string) => {
+      this.winningColor = winningColor;
+    });
+    this.colorService.gameDifficultyChanged.subscribe((difficulty: string) => {
+      this.gameDifficulty = difficulty;
+    });
+  }
 
   resetColors() {
-    this.colorsReset.emit();
+    this.colorService.resetColors();
   }
 
   setDifficulty(diff: string) {
-    this.changeDifficulty.emit(diff);
-    // console.log(this.gameDifficulty);
+    this.colorService.changeDifficulty(diff);
   }
 
   ngOnInit(): void {
+    this.gameDifficulty = this.colorService.gameDifficulty;
   }
 
 }

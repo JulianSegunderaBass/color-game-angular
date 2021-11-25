@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { ColorsService } from "../colors.service";
 
 @Component({
   selector: 'color-cell',
@@ -16,20 +17,24 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 export class ColorCell {
   @Input('cellColor') cellColor: string = '';
-  @Input() winningColor: string = '';
-  @Input() counter: number = 0;
-  @Output() gameResult = new EventEmitter<string>();
-  @Output() decrementCounter = new EventEmitter();
+  @Input('winningColor') winningColor: string = '';
+  counter: number = 0;
   cellHidden: boolean = false;
+
+  constructor(private colorService: ColorsService) {
+    this.colorService.counterChanged.subscribe((newCounter: number) => {
+      this.counter = newCounter;
+    });
+  }
 
   onSelectCell() {
     if (this.cellColor === this.winningColor) {
-      this.gameResult.emit('win');
+      this.colorService.finishGame('win');
     } else {
       this.cellHidden = true;
-      this.decrementCounter.emit();
-      if (this.counter < 3) {
-        this.gameResult.emit('lose');
+      this.colorService.decrementCounter();
+      if (this.counter < 2) {
+        this.colorService.finishGame('lose');
       }
     }
   }
