@@ -1,25 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ColorsService } from "../colors.service";
 
 @Component({
   selector: 'cell-grid',
   template: `
     <div class="grid-container" *ngIf="gameStatus === ''; else evenBlocks">
-      <color-cell 
-        *ngFor="let color of colorList" 
-        [cellColor]="color" 
-        [winningColor]="winningColor" 
-        [counter]="counter"
-        (gameResult)="onGameFinish($event)"
-        (decrementCounter)="onDecrementCounter()">
-      </color-cell>
+      <color-cell *ngFor="let color of colorList" [cellColor]="color" [winningColor]="winningColor"></color-cell>
     </div>
     <ng-template #evenBlocks>
       <div class="grid-container">
-        <color-cell 
-          *ngFor="let color of colorList" 
-          [cellColor]="winningColor" 
-          [winningColor]="winningColor"
-          [counter]="counter">
+        <color-cell *ngFor="let color of colorList" [cellColor]="winningColor" [winningColor]="winningColor">
         </color-cell>
       </div>
     </ng-template>
@@ -30,22 +20,23 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 })
 
 export class CellGrid implements OnInit {
-  @Input() colorList: string[] = []
-  @Input() winningColor: string = '';
-  @Input() gameStatus: string = '';
-  @Input() counter: number = 0;
-  @Output() gameResult = new EventEmitter<string>();
-  @Output() decrementCounter = new EventEmitter();
+  colorList: string[] = [];
+  gameStatus: string = '';
+  winningColor: string = '';
 
-  onGameFinish(status: string) {
-    this.gameResult.emit(status);
-  }
-
-  onDecrementCounter() {
-    this.decrementCounter.emit();
+  constructor(private colorService: ColorsService) {
+    this.colorService.colorsChanged.subscribe((colors: string[]) => {
+      this.colorList = colors;
+    });
+    this.colorService.gameResultChanged.subscribe((status: string) => {
+      this.gameStatus = status;
+    });
+    this.colorService.winningColorChanged.subscribe((winningColor: string) => {
+      this.winningColor = winningColor;
+    });
   }
 
   ngOnInit(): void {
-    // console.log(this.counter);
+    this.colorService.generateColors(9);
   }
 }
